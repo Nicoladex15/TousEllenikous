@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Coniugatore</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<div id="container">
+    <h1 id="titolo">Coniugatore</h1>
+
+    <!-- INPUT -->
+    <div class="menu">
+        <input type="text" id="inputVerbo" placeholder="Inserisci un verbo (es. λύω)">
+        <button onclick="coniugaDaInput()">Coniuga</button>
+    </div>
+
+    <!-- RISULTATO -->
+    <div id="output">
+        <p>Inserisci un verbo oppure selezionalo dal dizionario.</p>
+    </div>
+
+    <button class="back" onclick="window.location.href='../index.html'">← Torna alla Home</button>
+
+    <button class="back" onclick="window.location.href='declinatore_coniugatore.html'">← Torna a Declinatore/Coniugatore</button>
+</div>
+
+<script type="module">
+  import {
+    coniugaPresenteAttivo,
+    coniugaPresenteMedioPassivo,
+    coniugaImperativoAttivo,
+    coniugaImperativoMedioPassivo,
+    coniugaInfinitoAttivo,
+    coniugaInfinitoMedioPassivo,
+    coniugaEimiPresenteIndicativo,
+    coniugaEimiImperativo,
+    coniugaEimiInfinito
+  } from "./coniugatore.js";
+
+  window.coniugaDaInput = function () {
+    const lemma = document.getElementById("inputVerbo").value.trim();
+    const output = document.getElementById("output");
+
+    if (!lemma) {
+      output.innerHTML = "<p>Inserisci un lemma verbale.</p>";
+      return;
+    }
+
+    // Verbo εἰμί
+    if (lemma === "ειμί" || lemma === "εἰμί") {
+      const indicativo = coniugaEimiPresenteIndicativo();
+      const imperativo = coniugaEimiImperativo();
+      const infinito = coniugaEimiInfinito();
+
+      let text = "";
+
+      text += "<h2>Presente Indicativo</h2>";
+      for (const p in indicativo) text += `<p><b>${p}</b>: ${indicativo[p]}</p>`;
+
+      text += "<h2>Imperativo</h2>";
+      for (const p in imperativo) text += `<p><b>${p}</b>: ${imperativo[p]}</p>`;
+
+      text += "<h2>Infinito</h2>";
+      for (const p in infinito) text += `<p>${infinito[p]}</p>`;
+
+      output.innerHTML = text;
+      return;
+    }
+
+    // Verbi regolari
+    const presAtt = coniugaPresenteAttivo(lemma);
+    const presMed = coniugaPresenteMedioPassivo(lemma);
+    const impAtt = coniugaImperativoAttivo(lemma);
+    const impMed = coniugaImperativoMedioPassivo(lemma);
+    const infAtt = coniugaInfinitoAttivo(lemma);
+    const infMed = coniugaInfinitoMedioPassivo(lemma);
+
+    let text = "";
+
+    text += "<h2>Presente Attivo</h2>";
+    for (const p in presAtt) text += `<p><b>${p}</b>: ${presAtt[p]}</p>`;
+
+    text += "<h2>Presente Medio‑Passivo</h2>";
+    for (const p in presMed) text += `<p><b>${p}</b>: ${presMed[p]}</p>`;
+
+    text += "<h2>Imperativo Attivo</h2>";
+    for (const p in impAtt) text += `<p><b>${p}</b>: ${impAtt[p]}</p>`;
+
+    text += "<h2>Imperativo Medio‑Passivo</h2>";
+    for (const p in impMed) text += `<p><b>${p}</b>: ${impMed[p]}</p>`;
+
+    text += "<h2>Infinito Attivo</h2>";
+    for (const p in infAtt) text += `<p>${infAtt[p]}</p>`;
+
+    text += "<h2>Infinito Medio‑Passivo</h2>";
+    for (const p in infMed) text += `<p>${infMed[p]}</p>`;
+
+    output.innerHTML = text;
+  };
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Dettaglio Lemma</title>
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center; /* centra verticalmente */
+            align-items: center;     /* centra orizzontalmente */
+            height: 100vh;           /* occupa tutta l’altezza della finestra */
+            margin: 0;
+            text-align: center;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+        }
+
+        p {
+            margin: 8px 0;
+            font-size: 16px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 8px 16px;
+            font-size: 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+<h1 id="lemma"></h1>
+<p id="significato"></p>
+<p id="categoria"></p>
+<p id="note"></p>
+
+<button id="declinaBtn">Declina</button>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const lemmaCercato = params.get("lemma");
+
+fetch("../csv/lemmi.csv")
+    .then(response => response.text())
+    .then(text => {
+        const righe = text.split("\n");
+
+        for (let r of righe.slice(1)) {
+            const [lemma, significato, categoria, note] = r.split(";");
+
+            if (lemma === lemmaCercato) {
+                document.getElementById("lemma").textContent = lemma;
+                document.getElementById("significato").textContent = "Significato: " + significato;
+                document.getElementById("categoria").textContent = "Categoria: " + categoria;
+                document.getElementById("note").textContent = "Note: " + (note || "—");
+
+                document.getElementById("declinaBtn").onclick = () => {
+                    window.location.href = "declinatore.html?lemma=" + encodeURIComponent(lemma);
+                };
+
+                break;
+            }
+        }
+    });
+</script>
+
+</body>
+</html>

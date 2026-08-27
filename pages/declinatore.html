@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Declinatore</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<div id="container">
+    <h1 id="titolo">Declinatore</h1>
+
+    <!-- INPUT MANUALE -->
+    <div class="menu">
+        <input type="text" id="inputLemma" placeholder="Inserisci un lemma (es. λόγος)">
+        <button onclick="declinaDaInput()">Declina</button>
+    </div>
+
+    <!-- RISULTATO -->
+    <div id="output">
+        <p>Inserisci un lemma oppure selezionalo dal dizionario.</p>
+    </div>
+
+    <button class="back" onclick="window.location.href='../index.html'">← Torna alla Home</button>
+
+    <button class="back" onclick="window.location.href='declinatore_coniugatore.html'">← Torna a Declinatore/Coniugatore</button>
+</div>
+
+<!-- COLLEGAMENTO AI FILE JS -->
+<script type="module">
+  import { generaForme } from "./declinatore.js";
+
+  window.declinaDaInput = function () {
+    const lemma = document.getElementById("inputLemma").value.trim();
+    if (!lemma) return;
+
+    const forme = generaForme(lemma);
+
+    const output = document.getElementById("output");
+    output.innerHTML = Object.entries(forme)
+      .map(([k, v]) => `<p><b>${k}</b>: ${v}</p>`)
+      .join("");
+  };
+</script>
+
+</body>
+</html>

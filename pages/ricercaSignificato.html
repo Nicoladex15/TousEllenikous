@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Ricerca per Significato</title>
+    <link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+<div id="container">
+    <h1>Ricerca per Significato</h1>
+
+    <input type="text" id="searchSignificato" placeholder="Cerca per significato...">
+
+    <table id="results"></table>
+
+    <button class="back" onclick="window.location.href='../index.html'">← Torna alla Home</button>
+</div>
+
+<script>
+let lemmi = [];
+
+// Carica lo stesso CSV del dizionario
+fetch("../csv/lemmi.csv")
+    .then(response => response.text())
+    .then(text => {
+        const righe = text.split("\n");
+
+        lemmi = righe.slice(1).map(r => {
+            const [lemma, significato, categoria, note] = r.split(";");
+            return { lemma, significato, categoria, note };
+        });
+
+        // mostra tutti i lemmi subito
+        mostraRisultati(lemmi);
+    });
+
+function mostraRisultati(lista) {
+    const tabella = document.getElementById("results");
+    tabella.innerHTML = "";
+
+    lista.forEach(l => {
+        const riga = document.createElement("tr");
+        riga.innerHTML = `
+            <td><a href="dettaglio.html?lemma=${encodeURIComponent(l.lemma)}">${l.lemma}</a></td>
+            <td>${l.significato}</td>
+            <td>${l.categoria}</td>
+        `;
+        tabella.appendChild(riga);
+    });
+}
+
+document.getElementById("searchSignificato").addEventListener("input", e => {
+    const q = e.target.value.toLowerCase().trim();
+
+    const filtrati = q === ""
+        ? lemmi
+        : lemmi.filter(l =>
+            l.significato.toLowerCase().includes(q)
+        );
+
+    mostraRisultati(filtrati);
+});
+</script>
+
+</body>
+</html>
