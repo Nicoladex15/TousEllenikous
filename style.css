@@ -1,0 +1,231 @@
+/* ===== STILE GENERALE ===== */
+body {
+  font-family: "Roboto", sans-serif;
+  background-color: #ffffff;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+}
+
+/* ===== CONTENITORE CENTRALE (HOME) ===== */
+#container {
+  width: 90%;
+  max-width: 700px;
+  margin-top: 8vh;
+  text-align: center;
+  padding: 0 4vw;
+  box-sizing: border-box;
+}
+
+/* ===== TITOLI ===== */
+h1 {
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  font-weight: 700;
+  margin-bottom: 5vh;
+  color: #000;
+}
+
+/* ===== MENU PRINCIPALE ===== */
+.menu {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8vh; /* ← pulsanti quasi attaccati */
+}
+
+/* ===== PULSANTI — STILE ORIGINALE, PIÙ GRANDI E VICINI ===== */
+.menu button,
+.regole-container a,
+.morfologia-container a,
+.sintassi-container a,
+.fonetica-container a,
+.percorso-container a,
+.pillole-container a,
+.declinatore-container a,
+.coniugatore-container a,
+.back {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+
+  margin: 0.8vh auto;       /* ← distanza minima tra pulsanti */
+  padding: 1.3rem 0;        /* ← leggermente più grandi */
+  font-size: 1.35rem;       /* ← testo più grande */
+  font-weight: 700;
+
+  background-color: #e0e0e0;
+  color: #000;
+  border-radius: 10px;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+
+  transition: background 0.2s ease;
+  box-sizing: border-box;
+}
+
+.menu button:hover,
+.regole-container a:hover,
+.morfologia-container a:hover,
+.sintassi-container a:hover,
+.fonetica-container a:hover,
+.percorso-container a:hover,
+.pillole-container a:hover,
+.declinatore-container a:hover,
+.coniugatore-container a:hover,
+.back:hover {
+  background-color: #d5d5d5;
+}
+
+/* ===== SMARTPHONE (360–430px) ===== */
+@media (max-width: 430px) {
+
+  .menu {
+    gap: 1vh; /* ← ancora più vicini su telefono */
+  }
+
+  .menu button,
+  .regole-container a,
+  .back {
+    font-size: 1.7rem;
+    padding: 2rem 0;
+    margin: 1vh auto; /* ← pulsanti quasi attaccati */
+  }
+}
+
+
+.menu button:hover,
+.regole-container a:hover,
+.morfologia-container a:hover,
+.sintassi-container a:hover,
+.fonetica-container a:hover,
+.percorso-container a:hover,
+.pillole-container a:hover,
+.declinatore-container a:hover,
+.coniugatore-container a:hover,
+.back:hover {
+  background-color: #d5d5d5;
+}
+
+/* ===== ICONA HELP ===== */
+#help {
+  position: absolute;
+  top: 2vh;
+  right: 4vw;
+  background: #eee;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+#help:hover {
+  background: #ddd;
+}
+
+/* ===== PAGINE INTERNE ===== */
+.regole-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  min-height: 100vh;
+  text-align: center;
+  padding: 4vw;
+  box-sizing: border-box;
+}
+
+.regole-container ul {
+  list-style: none;
+  padding: 0;
+  margin: 3vh 0;
+}
+
+.regole-container li {
+  margin: 3vh 0;
+}
+
+/* ===== TESTO CENTRATO ===== */
+.testo-centrato {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+  line-height: 1.6;
+}
+
+/* ===== ICONA APP ===== */
+.app-icon {
+  width: clamp(80px, 15vw, 120px);
+  height: clamp(80px, 15vw, 120px);
+  margin: 0 auto 3vh auto;
+  display: block;
+}
+
+/* ===== MEDIA QUERIES ===== */
+
+/* Tablet */
+@media (min-width: 600px) and (max-width: 1024px) {
+  #container { max-width: 600px; }
+
+  .menu button,
+  .regole-container a,
+  .back {
+    font-size: 1.4rem;
+    padding: 1.4rem 0;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1025px) {
+  #container { max-width: 700px; }
+
+  .menu button,
+  .regole-container a,
+  .back {
+    font-size: 1.2rem;
+    padding: 1rem 0;
+    margin: 1.6vh auto; /* pulsanti vicini */
+  }
+}
+
+/* Smartphone (360–430px) */
+@media (max-width: 430px) {
+
+  #container {
+    width: 95%;
+    margin-top: 10vh;
+    padding: 0 6vw;
+  }
+
+  h1 {
+    font-size: 2.8rem;
+    margin-bottom: 4vh; /* più compatto */
+  }
+
+  .menu {
+    gap: 3vh; /* NON 4–5vh */
+  }
+
+  .menu button,
+  .regole-container a,
+  .back {
+    font-size: 1.7rem;
+    padding: 2rem 0;
+    margin: 2.2vh auto;
+  }
+
+  #help {
+    width: 50px;
+    height: 50px;
+    font-size: 1.6rem;
+  }
+}

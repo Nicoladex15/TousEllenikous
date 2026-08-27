@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Home</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" type="image/png" href="icons/icon-192.png">
+
+    <!-- Manifest PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+
+<div id="container">
+
+    <!-- Icona Help -->
+    <div id="help" onclick="window.location.href='pages/info.html'">?</div>
+
+    <!-- Titolo -->
+    <h1>Τοὺς Ἑλληνικούς</h1>
+
+    <!-- Menu principale -->
+    <div class="menu">
+
+        <button class="btn" onclick="window.location.href='pages/dizionario.html'">
+            Dizionario
+        </button>
+
+        <button class="btn" onclick="window.location.href='pages/regole.html'">
+            Regole Grammaticali
+        </button>
+
+        <button class="btn" onclick="window.location.href='pages/ricercaSignificato.html'">
+            Ricerca per Significato
+        </button>
+
+        <button class="btn" onclick="window.location.href='pages/percorso-guidato.html'">
+            Percorso Guidato
+        </button>
+
+        <button class="btn" onclick="window.location.href='pages/declinatore_coniugatore.html'">
+            Declinatore/Coniugatore automatici
+        </button>
+
+        <button class="btn" onclick="window.location.href='pages/pillole_cultura.html'">
+            Pillole di Cultura
+        </button>
+
+    </div>
+
+</div>
+
+<!-- ⭐ Registrazione del Service Worker -->
+<script>
+if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('service-worker.js')
+        .then(() => console.log("Service Worker registrato"))
+        .catch(err => console.error("Errore SW:", err));
+}
+</script>
+
+</body>
+</html>
